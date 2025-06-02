@@ -1,14 +1,8 @@
 package com.curso.trabajoconoperadores
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -25,9 +19,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val miNumero:EditText = findViewById(R.id.editTextText)
+        val miNumero:EditText = findViewById(R.id.resultadoEdad)
         val miBoton: Button = findViewById(R.id.button)
-        val miResultado: TextView = findViewById(R.id.textView)
+        val miResultado: TextView = findViewById(R.id.mensajes)
+
+        val miBotonSumar: Button = findViewById(R.id.botonSumar)
+        val miBotonRestar: Button = findViewById(R.id.botonRestar)
 
         miBoton.setOnClickListener{
             val numero: Int? = miNumero.text.toString().toIntOrNull()
@@ -35,6 +32,25 @@ class MainActivity : AppCompatActivity() {
             else if (numero < 18) "Es menor de edad"
             else if(numero > 18) "Es mayor de edad"
             else "tienes $numero años"
+        }
+
+        miBotonSumar.setOnClickListener {
+            val numeroInicial: Int? = miNumero.text.toString().toIntOrNull()
+            if (numeroInicial == null) {
+                miResultado.text = "No es un número"
+            } else {
+                val numeroIncremento = numeroInicial + 1
+                miNumero.setText(numeroIncremento.toString())
+            }
+        }
+        miBotonRestar.setOnClickListener {
+            val numeroInicial: Int? = miNumero.text.toString().toIntOrNull()
+            if (numeroInicial == null) {
+                miResultado.text = "No es un número"
+            } else {
+                val numeroIncremento = numeroInicial - 1
+                miNumero.setText(numeroIncremento.toString())
+            }
         }
     }
 }
