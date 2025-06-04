@@ -28,10 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         miBoton.setOnClickListener{
             val numero: Int? = miNumero.text.toString().toIntOrNull()
-            miResultado.text= if (numero == null) "No es un numero"
-            else if (numero < 18) "Es menor de edad"
-            else if(numero > 18) "Es mayor de edad"
-            else "tienes $numero años"
+            mostrarMensaje(numero, miResultado)
         }
 
         miBotonSumar.setOnClickListener {
@@ -41,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val numeroIncremento = numeroInicial + 1
                 miNumero.setText(numeroIncremento.toString())
+                mostrarMensaje(numeroIncremento, miResultado)
             }
         }
         miBotonRestar.setOnClickListener {
@@ -50,7 +48,18 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val numeroIncremento = numeroInicial - 1
                 miNumero.setText(numeroIncremento.toString())
+                mostrarMensaje(numeroIncremento,miResultado)
             }
         }
+    }
+
+    private fun mostrarMensaje(edad: Int?, txtResult: TextView) {
+        val mensaje = when (edad) {
+            null -> "No es un numero"
+            in 0..17 -> "Es menor de edad"
+            in 18..110 -> "Es mayor de edad"
+            else -> "tienes $edad años"
+        }
+        txtResult.text = mensaje
     }
 }
