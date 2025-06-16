@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         val mensaje = when (edad) {
             null -> "No es un numero"
             in 0..17 -> "Es menor de edad"
-            in 18..110 -> "Es mayor de edad"
+            in 18..30 -> "Es un adulto joven"
+            in 31..110 -> "Es un adulto mayor"
             else -> "tienes $edad años"
         }
         txtResult.text = mensaje
